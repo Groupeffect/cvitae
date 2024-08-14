@@ -1,0 +1,66 @@
+{% load static %}
+<table class="t-left" style="margin-bottom: 14px;">
+    <tr>
+        <td class="w-100">
+            <p><b>Arbeitserfahrung Erfahrung in folgenden Bereichen:</b></p>
+
+        </td>
+    </tr>
+</table>
+
+{% for item in response.data.work %}
+<table class="t-left smaller-text">
+    <tr style="text-align: justify;">
+        <td class="w-33">
+            <li>
+                <b>{{ item.title }}</b>
+            </li>
+            {{ item.description | safe }}
+            
+        </td>
+    </tr>
+</table>
+{% endfor %}
+<hr>
+<table class="t-left smaller-text">
+    <tr>
+        <th>
+            Bildung
+        </th>
+
+        <th>
+            Qualifikationen
+        </th>
+        <th>
+            Coding
+        </th>
+    </tr>
+    <tr >
+        <td class="w-33">
+            {% for education in response.data.educations %}
+            <li>
+                {{ education.title }}
+            </li>
+            <p class="smaller-text" style="text-align: left;">{{ education.institution }}</p>
+            {% endfor %}
+            
+        </td>
+        <td class="w-25">
+            {% for qualification in response.data.qualifications %}
+            <li>
+                {{ qualification.title }}
+            </li>
+            <p class="smaller-text" style="text-align: left;">{{ qualification.institution }}</p>
+            
+            {% endfor %}
+            
+        </td>
+        <td class="w-25">
+            {% for skill in response.data.skills|dictsort:"sorting" %}
+                {{ skill.title }}
+            {% endfor %}
+            
+        </td>
+
+    </tr>
+</table>

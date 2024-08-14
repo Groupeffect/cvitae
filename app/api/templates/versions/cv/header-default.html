@@ -1,0 +1,61 @@
+{% load static %}
+<table class="center">
+    <tr>
+        <td class="w-33 center">
+                <!-- avatar -->
+                {% if response.data.avatar %}
+                <img class="avatar" src="{{ response.data.avatar.image_b64 | safe }}" alt="avatar">
+                {% else %}
+                <img class="avatar" src="{{ response.data.person.avatar.image_b64 | safe }}" alt="avatar">
+                {% endif %}
+        </td>
+        <td style="padding-left: 20px;">
+            <p><b>{{ response.data.person.job_title }}</b></p>
+            <p class="subtitle">{{ response.data.person.subtitle }}</p>
+            <hr>
+            <table class="smaller-text">
+                <tr>
+                    <td>
+                        <p>Name:</p>
+
+                    </td>
+                    <td>
+                        <p><b>{{ response.data.person.first_name }} {{ response.data.person.last_name }}</b></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Tel.:</p>
+
+                    </td>
+                    <td>
+                        <p>{{ response.data.person.phone }}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Web:</p>
+                    </td>
+                    <td>
+                        <p>{{ response.data.person.website }}</p>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Mail:</p>
+                    </td>
+                    <td>
+                        <p>{{ response.data.person.email }}</p>
+
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<div class="center">
+    <hr>
+    <p class="smaller-text">{{ response.data.person.description | safe }}</p>
+    <hr>
+</div>

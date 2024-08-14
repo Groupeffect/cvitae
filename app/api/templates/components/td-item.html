@@ -1,0 +1,17 @@
+<p class=""><b>{{ item.name | safe }}</b></p>
+{% if item.institution %}
+<p class="mb-4"> {{ item.institution }}</p>
+{% endif %}
+
+{% if item.description %}
+    <div class="text-justify mb-12">{{ item.description | safe }}</div>
+{% endif %}
+
+{% if 'companies' in item %}
+<p class="mt">
+    Zusammenarbeit mit:
+    {% for company in item.companies %}
+    <p>+ {{ company.name }} ({{ company.category }})</p>
+    {% endfor %}
+</p>
+{% endif %}

@@ -1,0 +1,10 @@
+{% extends 'index.html'%}
+{% load static %}
+{% block letter %}
+{% include 'components/letter.html' %}
+{% endblock %}
+{% block cv %}
+    <div class="w-50">
+        {% include 'components/cv.html' %}
+    </div>
+{% endblock %}

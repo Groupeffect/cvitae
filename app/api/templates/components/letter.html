@@ -1,0 +1,12 @@
+{% load static %}
+{% block letter %}
+<div id="cover-letter" class="cv-page w-75 center">
+    {% if response.data.template.letter_header %}
+        {% include response.data.template.letter_header %}
+    {% endif %}
+    {% if response.data.template.letter_body %}
+        {% include response.data.template.letter_body %}
+    {% endif %}
+
+</div>
+{% endblock letter %}

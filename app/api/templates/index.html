@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupeffect</title>
+    <meta name="author" content="Amir Yousefi">
+    
+    <style>
+        html body {
+            padding-left: auto;
+            padding-right: auto;
+            margin-left: auto;
+            margin-right: auto;
+            width: 210mm;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            letter-spacing: 0.06rem;
+            word-spacing: 0.1rem;
+            line-height: 1.3rem;
+        }
+
+        td {
+            vertical-align: top;
+            padding-right: 12px;
+        }
+
+        p {
+            padding: 0px;
+            margin: 0;
+            width: 100%;
+            text-align: justify;
+        }
+        
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .text-justify{
+            text-align: justify;
+        }
+
+        .cv-page {
+
+            width: 210mm;
+            height: 297mm;
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+        .w-15 {
+            width: 15%;
+        }
+        .w-33 {
+            width: 33%;
+        }
+
+        .w-75 {
+            width: 75%;
+        }
+
+        .w-50 {
+            width: 50%;
+        }
+
+        .w-25 {
+            width: 25%;
+        }
+        .w-85 {
+            width: 85%;
+        }
+
+        .t-right {
+            text-align: right;
+        }
+
+        .t-left {
+            text-align: left;
+        }
+
+        .avatar {
+            width: 100%;
+            background-color: black;
+            border-radius: 20% 0% 20% 0%;
+            border-color: none;
+        }
+
+        .center {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .letter-text {
+            line-height: 1.6rem;
+        }
+        .smaller-text {
+            font-size: smaller;
+        }
+
+        .larger-text {
+            font-size: larger;
+        }
+
+        .mt {
+            margin-top: 12px;
+        }
+        .mb-4 {
+            margin-bottom: 4px;
+        }
+        .mb-12 {
+            margin-bottom: 12px;
+        }
+        .border-bottom{
+            border-bottom: 2px;
+            border-bottom-color: black;
+        }
+
+        @page {
+            margin: 1cm;
+            size: portrait;
+            /* Suggest portrait orientation */
+            width: 210mm;
+            height: 297mm;
+            /* Consider using additional @page rules for section breaks (limited effectiveness) */
+        }
+
+        #footer {
+            text-align: right;
+            display: block;
+            /* display: none ; */
+        }
+
+        .subtitle {
+            font-size: smaller;
+            color: grey;
+        }
+
+
+        @media print {
+            #footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% block edit %}
+    {% endblock %}
+    {% block letter %}
+    {% endblock letter %}
+    {% block cv %}
+    {% endblock cv %}
+    <footer id="footer" class="smaller-text">
+        {{ response.data.person.first_name }} {{ response.data.person.last_name }} 
+        | {{ response.data.person.email }}
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+{% load static %}
+<div class="w-15 t-left" style="position: fixed; right: 0px; top:0px;z-index: 2; background-color: none;">
+    <label class="smaller-text" for="options">template configuration:</label>
+    
+    <select name="Options" id="options" onchange="postTemplateConfig(event,value)">
+        {% for i in response.data.template_options %}
+        {% if response.data.template.id == i.id %}
+        <option selected value="{{ i | safe }}">{{ i.name }}</option>
+        {% else %}
+        <option value="{{ i | safe }}">{{ i.name }}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+    <hr>
+    <a href="?">Api</a>
+    <a href="?format=app">Close</a>
+</form>
+</div>
+<script>
+    async function postTemplateConfig(event,value) {
+        const url = "/application/{{ response.data.id }}/";
+        const drf = {
+            "{{ csrf_header_name|default:'X-CSRFToken' | safe }}" : "{% if request %}{{ csrf_token | safe }}{% endif %}"
+        };
+        eval('var v='+value);
+        try {
+            const response = await fetch(url, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...drf
+                },
+                body: JSON.stringify({
+                    id: {{ response.data.id }},
+                    template: v.id
+                })
+            });
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+
+            const json = await response;
+            console.log(json);
+            location.reload()
+        } catch (error) {
+            console.error(error);
+        }
+    }
+</script>

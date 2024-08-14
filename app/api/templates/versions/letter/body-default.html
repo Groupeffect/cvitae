@@ -1,0 +1,28 @@
+{% load static %}
+<hr>
+<table class=" w-100 smaller-text">
+    <tr class="w-100">
+        <td class="w-50" >
+            <p>{{ response.data.cover_letter.header | safe }}</p>
+        </td>
+        <td class="w-50">
+            <p class="t-right">{{ response.data.cover_letter.date }}</p>
+        </td>
+    </tr>
+</table>
+<hr>
+<br>
+<br>
+<div class="center">
+    <p >{{ response.data.cover_letter.greeting }}</p>
+</div>
+<br>
+<br>
+<div id="cover-letter-text" class="center letter-text">
+        <p>{{ response.data.cover_letter.text | safe }}</p>
+</div>
+<br>
+<br>
+<div class="center">
+    <p>{{ response.data.cover_letter.footer | safe }}</p>
+</div>

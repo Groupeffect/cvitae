@@ -1,0 +1,18 @@
+{% load static %}
+<table class="w-100 smaller-text">
+    <tr>
+        <td class="w-50">
+            <p>{{ response.data.company.name }}</p>
+            <p>{{ response.data.company.address.street }} {{ response.data.company.address.house_number }}</p>
+            <p>{{ response.data.company.address.postal_code }} {{ response.data.company.address.city }}</p>
+        </td>
+        <td class="w-50 t-right">
+            <p class="t-right">{{ response.data.person.first_name }} {{ response.data.person.last_name }}</p>
+            <p class="t-right">{{ response.data.person.address.street }} 
+                {{ response.data.person.address.house_number }}</p>
+            <p class="t-right"> {{ response.data.person.address.postal_code }} {{ response.data.person.address.city }} </p>
+            <p class="t-right">{{ response.data.person.phone }}</p>
+            <p class="t-right">{{ response.data.person.email }}</p>
+        </td>
+    </tr>
+</table>

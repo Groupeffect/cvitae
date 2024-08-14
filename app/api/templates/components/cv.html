@@ -1,0 +1,13 @@
+{% load static %}
+<div id="cv-cover" class="cv-page">
+    {% block cv %}
+    <div class="center w-85">
+        {% if response.data.template.cv_header %}
+            {% include response.data.template.cv_header %}
+        {% endif %}
+        {% if response.data.template.cv_body %}
+            {% include response.data.template.cv_body %}
+        {% endif %}
+    </div>
+    {% endblock cv %}
+</div>

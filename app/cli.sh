@@ -29,3 +29,7 @@ load_demo(){
 dump_demo(){
     python manage.py dumpdata api.templateconfig api.person api.address --format=json -o demodump.json
 }
+join_pdfs(){
+	# gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=output.pdf file1.pdf file2.pdf
+	gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=output.pdf $1 $2
+}

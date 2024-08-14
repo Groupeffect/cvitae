@@ -27,8 +27,8 @@ class MetaCardModelMixin(models.Model):
     def __str__(self) -> str:
         if hasattr(self,"title"):
             if self.title:
-                return f"{self.title}"
-        return f"{self.name}"
+                return f"{self.title} - {self.id}"
+        return f"{self.name} - {self.id}"
 
 class Photo(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
@@ -183,5 +183,5 @@ class Application(MetaModel):
     template = models.ForeignKey(TemplateConfig, on_delete=models.DO_NOTHING, blank=True, null=True) 
     def __str__(self) -> str:
         if hasattr(self.job_posting, "title"):
-            return f"{self.job_posting.title}"
+            return f"{self.job_posting.title} - {self.id}"
         return f"{self.id}"

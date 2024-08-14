@@ -39,3 +39,6 @@ dcb:
 
 test:
 	python3 app/manage.py test api.tests
+
+dcc:
+	docker exec -it cvitae_cvitae_1 bash

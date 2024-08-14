@@ -78,7 +78,7 @@ class Person(MetaModel):
     website = models.URLField(blank=True,null=True)
 
     def __str__(self) -> str:
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name} - {self.id}"
 
 class Company(MetaModel):
     name = models.CharField(max_length=100, blank=True, null=True)

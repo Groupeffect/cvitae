@@ -36,3 +36,6 @@ dcd:
 	docker-compose down
 dcb:
 	docker-compose up --build --remove-orphans
+
+test:
+	python3 app/manage.py test api.tests

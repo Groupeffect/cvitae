@@ -46,3 +46,6 @@ cmd_simple_install(){
     pip install --no-cache-dir -r requirements.txt
     load_demo && run
 }
+testing(){
+    python3 manage.py test api.tests
+}

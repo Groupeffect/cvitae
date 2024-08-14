@@ -8,3 +8,13 @@ services:
     ports:
       - "8000:8000"
     command: bash -c 'source cli.sh && mig && run'
+
+  # cvitae_linter:
+  #   image: ghcr.io/super-linter/super-linter:latest
+  #   build:
+  #     context: "."
+  #   environment:
+  #     - RUN_LOCAL=true
+
+  #   volumes:
+  #     - "./app:/tmp/lint"

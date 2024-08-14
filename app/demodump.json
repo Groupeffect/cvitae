@@ -13,37 +13,34 @@
         }
     },
     {
-        "model": "api.address",
-        "pk": 1,
-        "fields": {
-            "sorting": 0.1,
-            "street": "Campus-Str.",
-            "house_number": "1",
-            "city": "Köln",
-            "postal_code": "50733",
-            "country": "Germany",
-            "allow_access": [
-            ]
-        }
-    },
-    {
         "model": "api.person",
         "pk": 1,
         "fields": {
             "sorting": 0.1,
-            "description": "🗝 Ich bin ein Open Source Enthusiast und schaue mir in meiner Freizeit gerne GitHub-Repositories an. Es macht mir Spaß innovative Software kennenzulernen und einzusetzen. Mein Ziel ist es mich in Nischenbereiche einzuarbeit, um Unternehmen zu helfen Mehrwert zu generieren.\r\n<i>\"Glücklicher Programmierer seit 2010.\"</i>. Diese Berwerbung basiert auf ein Programm, dass ich geschrieben habe, um Portfolios zu erstellen und der Source Code befindet sich auf <a href=\"https://github.com/Groupeffect/cvitae\" target=\"_blank\">Github</a>.",
+            "description": "Ich bin ein Open Source Enthusiast und schaue mir in meiner Freizeit gerne GitHub-Repositories an. Es macht mir Spaß innovative Software kennenzulernen und einzusetzen. Mein Ziel ist es mich in Nischenbereiche einzuarbeit, die Unternehmen helfen Mehrwert zu generieren.\r\n<i>\"Glücklicher Programmierer seit 2010\"</i>. Diese Berwerbung basiert auf ein Programm, dass ich geschrieben habe, um Portfolios zu erstellen und der Source Code befindet sich auf <a href=\"https://github.com/Groupeffect/cvitae\" target=\"_blank\">Github</a>.",
             "job_title": "Fullstack Software Developer",
             "subtitle": "M.Sc. Geoscience",
-            "avatar": 2,
+            "avatar": null,
             "first_name": "Amir",
             "last_name": "Yousefi",
             "email": "mail@groupeffect.de",
-            "phone": "*********",
+            "phone": "***********",
             "address": 1,
             "website": "https://github.com/Groupeffect",
-            "allow_access": [
-                1
-            ]
+            "allow_access": []
+        }
+    },
+    {
+        "model": "api.address",
+        "pk": 1,
+        "fields": {
+            "sorting": 0.1,
+            "street": "Demo-Str.",
+            "house_number": "1",
+            "city": "Demoberg",
+            "postal_code": "12345",
+            "country": "Germany",
+            "allow_access": []
         }
     }
 ]

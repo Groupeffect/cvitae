@@ -75,19 +75,24 @@ class TemplateConfigModelSerializer(MetaSerializer):
         fields = "__all__"
 
 class ApplicationSlimModelSerializer(MetaSerializer):
-    link = serializers.SerializerMethodField(read_only=True)
-
+    links = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = models.Application
-        fields = ["link","id","company","template"]
-    def get_link(self, instance):
+        fields = ["id","company","template","links"]
+    def get_links(self, instance):
         r = self.context["request"]
         a = self.context["view"].action
         url = r.build_absolute_uri()
-
+        params = ["edit","app","api","cv","letter","slim","json"]
+        uri = parse.urljoin(url,str(instance.id))
+        links = [
+            parse.urljoin(uri,f"?format={i}")
+            for i in params
+        ]
         if a in ["list"]:
-            return parse.urljoin(url,str(instance.id))
+            return links
         return url
+
 
 class ApplicationModelSerializer(ApplicationSlimModelSerializer):
     company = CompanyModelSerializer(read_only=True)

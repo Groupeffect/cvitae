@@ -6,7 +6,9 @@ different version of the same appliction instance. Print the result in your Brow
 application. Or create documents / websites and reuse database and templates.
 Create Browsable REST-Api's  with django rest framework.
 
-[Demo Document](DemoDocument.pdf)
+[Demo PDF Document](DemoDocument.pdf)
+
+<img alt="Document" style="width:100%;" src="ScreenshotDocument.png" />
 
 ***Keywords***
 

@@ -29,7 +29,6 @@ load_demo(){
     mig
     createsuperuser
     python manage.py loaddata --app=api --format=json demodump.json
-    run
 }
 dump_demo(){
     # save demo data to json file

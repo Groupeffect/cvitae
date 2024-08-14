@@ -17,6 +17,7 @@ jobs:
         run: |
           pip3 install --no-cache-dir -r app/requirements.txt
           cd app && source cli.sh
-          mig
-      - name: Testing wwith Django
+      - name: Migrate DB
+        run: cd app && source ./cli.sh && mig
+      - name: Testing with Django
         run: cd app && python3 manage.py test api.tests

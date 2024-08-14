@@ -1,3 +1,20 @@
+cleanup:
+	black .
+dcu:
+	docker-compose up
+dcd:
+	docker-compose down
+dcb:
+	docker-compose up --build --remove-orphans
+dcc:
+	docker exec -it cvitae_cvitae_1 bash
+test:
+	python3 app/manage.py test api.tests
+setupenv:
+	python -m venv cvenv
+	source cvenv/bin/activate
+	pip install black
+	pip --no-cache-dir -r install app/requirements.txt
 lint:
 	pwd && ls
 	docker run \
@@ -20,25 +37,3 @@ lint:
 		-v ./:/tmp/lint \
 		--rm \
 		github/super-linter:latest
-
-cleanup:
-	black .
-
-setupenv:
-	python -m venv cvenv
-	source cvenv/bin/activate
-	pip install black
-	pip --no-cache-dir -r install app/requirements.txt
-
-dcu:
-	docker-compose up
-dcd:
-	docker-compose down
-dcb:
-	docker-compose up --build --remove-orphans
-
-test:
-	python3 app/manage.py test api.tests
-
-dcc:
-	docker exec -it cvitae_cvitae_1 bash

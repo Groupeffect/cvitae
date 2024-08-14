@@ -7,8 +7,12 @@ lint:
 		-e SAVE_SUPER_LINTER_SUMMARY=true \
 		-e SUPER_LINTER_SUMMARY_FILE_NAME=linter_report.md \
 		-e SAVE_SUPER_LINTER_OUTPUT=true \
+		-e SUPER_LINTER_OUTPUT_DIRECTORY_NAME=/tmp/lint \
 		-e IGNORE_GITIGNORED_FILES=true \
 		-e FIX_ENV=true \
+		-e FIX_PYTHON_BLACK=true \
+		-e VALIDATE_HTML=false \
+		-e PYTHONUNBUFFERRED=0 \
 		-v ./:/tmp/lint \
 		--rm \
 		github/super-linter:latest

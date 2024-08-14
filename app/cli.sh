@@ -43,6 +43,6 @@ cmd_simple_install(){
     # simple cli installation for demo setup with virtual environment based on venv
     python -m venv cvenv
     source cvenv/bin/activate
-    pip install -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt
     load_demo && run
 }

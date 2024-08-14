@@ -42,12 +42,19 @@ docker-compose up
 docker-compose down
 ```
 
+[Setup with Makefile](Makefile)
+
 ***Keywords***
 
 - Python
+- Javascript
 - Django
 - django rest framework
 - Docker
+- Bash
+- Makefile
+- Backend
+- Frontend
 - Portfolio
 - CV
 

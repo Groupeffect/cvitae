@@ -14,7 +14,7 @@ Create Browsable REST-Api's  with django rest framework.
 ```
 # Demo usage in shell
 
-source app/cli.sh && load_demo && run
+source app/cli.sh && cmd_simple_install
 
 # follow cli instructions
 # then open in your browser

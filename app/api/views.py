@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from rest_framework.viewsets import ModelViewSet
+from django.shortcuts import redirect
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework import mixins
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
 from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 from api import serializers
-
 # Create your views here.
 
 
@@ -10,17 +12,21 @@ class PDFRenderer(BrowsableAPIRenderer):
     template = "application.html"
     format = "app"
 
+
 class PDFCVRenderer(BrowsableAPIRenderer):
     template = "application_cv.html"
     format = "cv"
+
 
 class PDFLetterRenderer(BrowsableAPIRenderer):
     template = "application_letter.html"
     format = "letter"
 
+
 class EditRenderer(BrowsableAPIRenderer):
     template = "application_edit.html"
     format = "edit"
+
 
 class SlimApiRenderer(BrowsableAPIRenderer):
     format = "slim"
@@ -48,12 +54,21 @@ class ApplicationModelViewSet(ModelViewSet):
         elif self.action in ["list"]:
             return serializers.ApplicationSlimModelSerializer
         return self.serializer_class
+
     def get_queryset(self):
         return self.serializer_class.Meta.model.objects.all()
-    
+
 
 class TemplateConfigModelViewSet(ModelViewSet):
     serializer_class = serializers.TemplateConfigModelSerializer
 
     def get_queryset(self):
         return self.serializer_class.Meta.model.objects.all()
+
+
+class AdminRedirectViewSet(mixins.ListModelMixin, GenericViewSet):
+    def get_queryset(self):
+        return None
+
+    def list(self, request, *args, **kwargs):
+        pass

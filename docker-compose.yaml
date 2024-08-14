@@ -1,0 +1,10 @@
+services:
+  cvitae:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    volumes:
+      - "./app:/app"
+    ports:
+      - "8000:8000"
+    command: bash -c 'source cli.sh && mig && run'

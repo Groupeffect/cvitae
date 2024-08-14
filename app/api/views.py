@@ -1,10 +1,8 @@
-from django.shortcuts import redirect
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework import mixins
-from rest_framework.reverse import reverse
-from rest_framework.response import Response
 from rest_framework.renderers import BrowsableAPIRenderer, JSONRenderer
 from api import serializers
+
 # Create your views here.
 
 

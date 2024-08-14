@@ -10,5 +10,5 @@ lint:
 		-e IGNORE_GITIGNORED_FILES=true \
 		-v ./:/tmp/lint \
 		--rm \
-		github/super-linter:latest
+		github/super-linter:latest > linter_report.md
 # ghcr.io/super-linter/super-linter:latest

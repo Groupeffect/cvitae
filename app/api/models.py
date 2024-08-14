@@ -1,6 +1,6 @@
+import base64
 from django.db import models
 from django.contrib.auth import get_user_model
-import base64
 
 # Create your models here.
 
@@ -10,40 +10,45 @@ User = get_user_model()
 class MetaModel(models.Model):
     allow_access = models.ManyToManyField(User, blank=True)
     sorting = models.FloatField(default=0.1)
+
     class Meta:
         abstract = True
         ordering = ["sorting"]
+
 
 class MetaCardModelMixin(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
     subtitle = models.CharField(max_length=100, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(blank=True,null=True)
-    css_classes = models.TextField(blank=True,null=True)
-    css_id = models.TextField(blank=True,null=True)
+    description = models.TextField(blank=True, null=True)
+    css_classes = models.TextField(blank=True, null=True)
+    css_id = models.TextField(blank=True, null=True)
+
     class Meta:
         abstract = True
 
     def __str__(self) -> str:
-        if hasattr(self,"title"):
+        if hasattr(self, "title"):
             if self.title:
                 return f"{self.title} - {self.id}"
         return f"{self.name} - {self.id}"
+
 
 class Photo(models.Model):
     title = models.CharField(max_length=100, blank=True, null=True)
     subtitle = models.CharField(max_length=100, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
-    description = models.TextField(blank=True,null=True)
-    css_classes = models.TextField(blank=True,null=True)
-    css_id = models.TextField(blank=True,null=True)
-    image_b64 = models.TextField(blank=True,null=True)
-    image = models.ImageField(upload_to='photos')
+    description = models.TextField(blank=True, null=True)
+    css_classes = models.TextField(blank=True, null=True)
+    css_id = models.TextField(blank=True, null=True)
+    image_b64 = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to="photos")
+
     def save(
         self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         file = self.image.file
-        self.name = file.name.split('/')[-1]
+        self.name = file.name.split("/")[-1]
         b64 = f"data:image/{file.name.split('.')[-1]};base64, {base64.b64encode(file.read()).decode('ascii')}"
         self.image_b64 = b64
         return super().save(force_insert, force_update, using, update_fields)
@@ -64,10 +69,12 @@ class Address(MetaModel):
 
 
 class Person(MetaModel):
-    description = models.TextField(blank=True,null=True)
+    description = models.TextField(blank=True, null=True)
     job_title = models.CharField(max_length=100, blank=True, null=True)
     subtitle = models.CharField(max_length=100, blank=True, null=True)
-    avatar = models.ForeignKey(Photo, on_delete=models.DO_NOTHING, blank=True, null=True)
+    avatar = models.ForeignKey(
+        Photo, on_delete=models.DO_NOTHING, blank=True, null=True
+    )
     first_name = models.CharField(max_length=100, blank=True, null=True)
     last_name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(blank=True)
@@ -75,10 +82,11 @@ class Person(MetaModel):
     address = models.ForeignKey(
         Address, on_delete=models.DO_NOTHING, blank=True, null=True
     )
-    website = models.URLField(blank=True,null=True)
+    website = models.URLField(blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.first_name} {self.last_name} - {self.id}"
+
 
 class Company(MetaModel):
     name = models.CharField(max_length=100, blank=True, null=True)
@@ -105,7 +113,7 @@ class JobPosting(MetaModel):
         return f"{self.company.name} - {self.title}"
 
 
-class WorkExperience(MetaCardModelMixin,MetaModel):
+class WorkExperience(MetaCardModelMixin, MetaModel):
     companies = models.ManyToManyField(Company, blank=True)
     duration_years = models.FloatField(default=1.5)
 
@@ -117,22 +125,23 @@ class Education(MetaCardModelMixin, MetaModel):
     )
 
 
-class Skill(MetaCardModelMixin,MetaModel):
+class Skill(MetaCardModelMixin, MetaModel):
     pass
 
-class Qualification(MetaCardModelMixin,MetaModel):
+
+class Qualification(MetaCardModelMixin, MetaModel):
 
     institution = models.CharField(max_length=100, blank=True, null=True)
     address = models.ForeignKey(
         Address, on_delete=models.DO_NOTHING, blank=True, null=True
     )
 
-class Internship(MetaCardModelMixin,MetaModel):
+
+class Internship(MetaCardModelMixin, MetaModel):
     address = models.ForeignKey(
         Address, on_delete=models.DO_NOTHING, blank=True, null=True
     )
     institution = models.CharField(max_length=100, blank=True, null=True)
-
 
 
 class CoverLetter(MetaModel):
@@ -145,24 +154,30 @@ class CoverLetter(MetaModel):
     company = models.ForeignKey(
         Company, on_delete=models.DO_NOTHING, blank=True, null=True
     )
-    start = models.DateField(blank=True,null=True)
+    start = models.DateField(blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.name}"
-    
+
 
 class TemplateConfig(MetaModel):
-    name = models.TextField(blank=True,null=True)
-    cv_header = models.TextField(blank=True,null=True)
-    cv_body = models.TextField(blank=True,null=True)
-    letter_header = models.TextField(blank=True,null=True)
-    letter_body = models.TextField(blank=True,null=True)
+    name = models.TextField(blank=True, null=True)
+    cv_header = models.TextField(blank=True, null=True)
+    cv_body = models.TextField(blank=True, null=True)
+    letter_header = models.TextField(blank=True, null=True)
+    letter_body = models.TextField(blank=True, null=True)
+
     def __str__(self) -> str:
         return f"{self.name}"
 
+
 class Application(MetaModel):
-    avatar = models.ForeignKey(Photo, on_delete=models.DO_NOTHING, blank=True, null=True)
-    language = models.CharField(max_length=2,choices=[["de","DE"],["en","EN"]], default="de")
+    avatar = models.ForeignKey(
+        Photo, on_delete=models.DO_NOTHING, blank=True, null=True
+    )
+    language = models.CharField(
+        max_length=2, choices=[["de", "DE"], ["en", "EN"]], default="de"
+    )
     job_posting = models.ForeignKey(
         JobPosting, on_delete=models.DO_NOTHING, blank=True, null=True
     )
@@ -180,7 +195,10 @@ class Application(MetaModel):
     skills = models.ManyToManyField(Skill, blank=True)
     qualifications = models.ManyToManyField(Qualification, blank=True)
     work = models.ManyToManyField(WorkExperience, blank=True)
-    template = models.ForeignKey(TemplateConfig, on_delete=models.DO_NOTHING, blank=True, null=True) 
+    template = models.ForeignKey(
+        TemplateConfig, on_delete=models.DO_NOTHING, blank=True, null=True
+    )
+
     def __str__(self) -> str:
         if hasattr(self.job_posting, "title"):
             return f"{self.job_posting.title} - {self.id}"

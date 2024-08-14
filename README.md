@@ -10,6 +10,17 @@ Create Browsable REST-Api's  with django rest framework.
 
 <img alt="Document" style="width:100%;" src="ScreenshotDocument.png" />
 
+[Setup with CLI](app/cli.sh)
+```
+# Demo usage in shell
+
+source app/cli.sh && load_demo && run
+
+# follow cli instructions
+# then open in your browser
+# api -> http://localhost:8000/api
+# admin -> http://localhost:8000/admin
+
 ***Keywords***
 
 - Python

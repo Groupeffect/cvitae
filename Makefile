@@ -3,7 +3,6 @@ lint:
 	docker run \
 		-e LOG_LEVEL=ERROR \
 		-e RUN_LOCAL=true \
-		-e VALIDATE_ALL_CODEBASE=true \
 		-e SAVE_SUPER_LINTER_SUMMARY=true \
 		-e SUPER_LINTER_SUMMARY_FILE_NAME=linter_report.md \
 		-e SAVE_SUPER_LINTER_OUTPUT=true \
@@ -11,8 +10,13 @@ lint:
 		-e IGNORE_GITIGNORED_FILES=true \
 		-e FIX_ENV=true \
 		-e FIX_PYTHON_BLACK=true \
-		-e VALIDATE_HTML=false \
+		-e VALIDATE_PYTHON_BLACK=true \
+		-e VALIDATE_BASH=true \
+		-e VALIDATE_PYTHON=true \
+		-e VALIDATE_YAML=true \
 		-e PYTHONDONTWRITEBYTECODE=1 \
+		-e VALIDATE_GITHUB_ACTIONS=true \
+		-e VALIDATE_CSS=true \
 		-v ./:/tmp/lint \
 		--rm \
 		github/super-linter:latest

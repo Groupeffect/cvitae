@@ -1,0 +1,21 @@
+name: Django Testing
+
+on: [push]
+
+jobs:
+  django_tests:
+    name: django-tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install Requirements
+        run: |
+          pip3 install --no-cache-dir -r app/requirements.txt
+          cd app && source cli.sh
+          mig
+        run: cd app && python3 manage.py test api.tests

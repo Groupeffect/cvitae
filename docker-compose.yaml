@@ -4,7 +4,7 @@ services:
       context: "."
       dockerfile: Dockerfile
     environment:
-      - PYTHONUNBUFFERRED=0
+      - PYTHONDONTWRITEBYTECODE=1
     volumes:
       - "./app:/app"
     ports:

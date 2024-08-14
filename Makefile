@@ -12,7 +12,7 @@ lint:
 		-e FIX_ENV=true \
 		-e FIX_PYTHON_BLACK=true \
 		-e VALIDATE_HTML=false \
-		-e PYTHONUNBUFFERRED=0 \
+		-e PYTHONDONTWRITEBYTECODE=1 \
 		-v ./:/tmp/lint \
 		--rm \
 		github/super-linter:latest

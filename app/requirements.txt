@@ -2,3 +2,4 @@ Django
 djangorestframework
 pillow
 django-extensions
+django-lifecycle

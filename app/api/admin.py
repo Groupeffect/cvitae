@@ -2,7 +2,6 @@ from django.contrib import admin
 from api import models
 
 # Register your models here.
-
 admin.site.site_title = "Groupeffect"
 admin.site.site_header = "Groupeffect"
 admin.site.register(models.Address)

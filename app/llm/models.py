@@ -1,3 +1,3 @@
-from django.db import models
+from llm.database import collector
 
 # Create your models here.

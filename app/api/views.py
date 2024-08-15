@@ -70,3 +70,11 @@ class AdminRedirectViewSet(mixins.ListModelMixin, GenericViewSet):
 
     def list(self, request, *args, **kwargs):
         pass
+
+
+class LLMRedirectViewSet(mixins.ListModelMixin, GenericViewSet):
+    def get_queryset(self):
+        return None
+
+    def list(self, request, *args, **kwargs):
+        pass

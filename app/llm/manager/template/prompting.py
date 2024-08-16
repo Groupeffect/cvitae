@@ -1,4 +1,4 @@
-from django.core import exceptions
+from django.core import exceptions, serializers
 import logging
 
 logger = logging.getLogger(__name__)
@@ -10,12 +10,12 @@ class PrefacePromptGenerator:
         self.prefaces = self.instance.prefaces
         self.template = """\n"""
 
-    def get_many(self, key="jobpostings__document", meta="SYSTEM CONTEXT JOBPOSTING"):
+    def get_many(self, key="jobpostings__document", meta="JOBPOSTING"):
         """return list of items from many to many fields"""
         result = []
         for i in enumerate(self.prefaces.values_list(key, flat=True)):
             if i[1]:
-                result.append(f"""\n{meta}  ITEM NUMBER {i[0]}:\n{i[1]}\n""")
+                result.append(f"""\n{meta} ITEM NUMBER {i[0]}:\n{i[1]}\n""")
         return result
 
     def write_template(self):
@@ -25,11 +25,11 @@ class PrefacePromptGenerator:
         content = []
         for field in self.instance.preface_fields:
             is_nested = False
-            for i in ["text", "description"]:
+            for i in ["text", "description", "document"]:
                 try:
                     content += self.get_many(
                         key=f"{field}__{i}",
-                        meta=f"SYSTEM CONTEXT {field}".upper(),
+                        meta=f"CONTEXT {field}".upper(),
                     )
                     is_nested = True
                 except exceptions.FieldError as e:
@@ -38,8 +38,11 @@ class PrefacePromptGenerator:
 
             if not is_nested:
                 try:
+                    content += [
+                        f"CONTEXT {field}:\n".upper(),
+                        *self.prefaces.values_list(field, flat=True),
+                    ]
 
-                    content += list(self.prefaces.values_list(field, flat=True))
                     logger.warning(content)
                 except exceptions.FieldError as e:
                     logger.warning(["##### E001", type(e), e])

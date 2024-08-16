@@ -34,6 +34,10 @@ dump_demo(){
     # save demo data to json file
     python manage.py dumpdata api.templateconfig api.person api.address --format=json -o demodump.json
 }
+dump_llm(){
+    # save demo data to json file
+    python manage.py dumpdata llm api --format=json -o llmdump.json
+}
 join_pdfs(){
 	# gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=output.pdf file1.pdf file2.pdf
 	gs -q -sPAPERSIZE=letter -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=output.pdf $1 $2

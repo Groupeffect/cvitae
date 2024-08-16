@@ -4,13 +4,14 @@ from api import models as api_models
 from django_lifecycle import (
     LifecycleModelMixin,
     hook,
-    AFTER_SAVE,
     AFTER_CREATE,
     BEFORE_CREATE,
     AFTER_UPDATE,
 )
-from django_lifecycle.conditions import WhenFieldValueChangesTo, WhenFieldValueIs
+from django_lifecycle.conditions import WhenFieldValueChangesTo
 from llm.manager.template import prompting
+from cvitae.settings import BASE_DIR
+import os
 
 UserModel = get_user_model()
 
@@ -44,6 +45,24 @@ class PromptPreface(MetaModel):
     skills = models.ManyToManyField(api_models.Skill, blank=True)
     internships = models.ManyToManyField(api_models.Internship, blank=True)
     educations = models.ManyToManyField(api_models.Education, blank=True)
+    reset = models.BooleanField(
+        default=False, help_text="reset the formatting, instruction"
+    )
+
+    @hook(AFTER_CREATE)
+    @hook(AFTER_UPDATE, condition=WhenFieldValueChangesTo("reset", True))
+    def set_defaults(self):
+        files = [
+            ["formatting", "concept-formatting.md"],
+            ["instruction", "concept-assistant.md"],
+        ]
+
+        for i in files:
+            path = os.path.join(BASE_DIR, f"llm/manager/template/assets/{i[1]}")
+            with open(path, "r") as f:
+                setattr(self, i[0], f.read())
+        self.reset = False
+        self.save()
 
 
 class LLMClient(MetaModel):
